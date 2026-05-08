@@ -712,6 +712,13 @@ jobs:
             fi
           fi
 
+          wget https://github.com/Goldzxcbug/Droidspaces_Kernel_patch/blob/main/NTsync/ntsync_base.patch
+          wget https://github.com/Goldzxcbug/Droidspaces_Kernel_patch/blob/main/NTsync/ntsync_compat_android15-6.6.patch
+          patch -p1 -F 3 < ntsync_compat_android15-6.6.patch || true
+          echo ---------------------------------------------------------------------------------------------------------------------------------------------------
+          patch -p1 -F 3 < ntsync_base.patch || true
+          cat ./drivers/misc/ntsync.c
+
           echo "添加 Droidspaces 内核配置..."
           # 按文档规则逐个处理: 已启用则跳过, "# not set" 则替换, 不存在则追加
           enable_config() {
